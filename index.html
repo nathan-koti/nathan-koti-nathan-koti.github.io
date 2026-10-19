@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nathan Koti</title>
+<meta name="description" content="Nathan Koti, electrical engineering student. Academic and personal projects in digital design, embedded systems, and circuits.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="index.html">Nathan Koti</a>
+    <nav aria-label="Main">
+      <a href="academic.html">Academic</a>
+      <a href="personal.html">Personal</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>Nathan<br>Koti</h1>
+      <p>Electrical engineering student at the Milwaukee School of Engineering, graduating in 2029. Previously studied electrical engineering at RIT.</p>
+      <p>I design digital hardware and program microcontrollers, from a custom processor written in VHDL to touch-driven systems on the MSP430.</p>
+    </div>
+    <figure class="scope">
+      <svg id="scope" viewBox="0 0 480 270" role="img" aria-label="Timing diagram of a D flip-flop: a clock, a data signal, and an output that copies the data signal on each rising clock edge"></svg>
+      <figcaption>A D flip-flop: Q copies D on every rising edge of the clock.</figcaption>
+    </figure>
+  </section>
+
+  <section class="block">
+    <div class="folders">
+      <a class="folder academic" href="academic.html">
+        <h2>Academic</h2>
+        <p>Course projects and labs from RIT, including a RISC processor in VHDL, an MSP430 data display, transistor-level circuit design, and an electric vehicle team project.</p>
+        <span class="count">Six courses and one team project</span><br>
+        <span class="go">Open the Academic folder</span>
+      </a>
+      <a class="folder personal" href="personal.html">
+        <h2>Personal</h2>
+        <p>Things I build on my own time, starting with an optical microphone that turns a laser beam into sound.</p>
+        <span class="count">One finished project, more in progress</span><br>
+        <span class="go">Open the Personal folder</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="split">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div>
+          <h3>Digital design</h3>
+          <ul class="tags"><li>VHDL</li><li>Verilog</li><li>FSM design</li><li>Processor datapaths</li><li>Quartus Prime</li><li>ModelSim</li><li>Waveform debugging</li></ul>
+        </div>
+        <div>
+          <h3>Hardware</h3>
+          <ul class="tags"><li>MSP430</li><li>STM32</li><li>ESP32</li><li>I2C</li><li>UART</li><li>ADC sampling</li><li>Hardware timers</li><li>Oscilloscope</li><li>Soldering</li><li>3D printing</li></ul>
+        </div>
+        <div>
+          <h3>Software</h3>
+          <ul class="tags"><li>C</li><li>C++</li><li>Assembly</li><li>MATLAB</li><li>LTspice</li><li>Altium Designer</li><li>Onshape</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="split">
+      <h2>Experience</h2>
+      <div class="job">
+        <div>
+          <h3>Engineering Exploration Intern</h3>
+          <p>University of Illinois Urbana-Champaign</p>
+        </div>
+        <span class="course-meta">Summer 2023</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contact">
+    <div class="split">
+      <h2>Contact</h2>
+      <div>
+        <p class="lede" style="margin:0 0 1.25rem">The best way to reach me is by email.</p>
+        <div class="contact">
+          <a class="btn" href="mailto:nathan.koti106@gmail.com">nathan.koti106@gmail.com</a>
+          <a class="btn" href="https://github.com/nathan-koti">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Nathan Koti</footer>
+</div>
+
+<script>
+// Draws a D flip-flop timing diagram: CLK, D, and Q (Q takes D on each rising edge).
+(function(){
+  var svg=document.getElementById('scope');
+  var NS='http://www.w3.org/2000/svg';
+  function el(tag,attrs){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);svg.appendChild(e);return e;}
+  // screen grid
+  for(var x=0;x<=480;x+=40)el('line',{x1:x,y1:0,x2:x,y2:270,'class':'g'});
+  for(var y=0;y<=270;y+=33.75)el('line',{x1:0,y1:y,x2:480,y2:y,'class':'g'});
+
+  var x0=60, P=60, n=7, xEnd=x0+P*n;
+  var lanes=[{name:'CLK',top:30,color:'var(--ch1)'},{name:'D',top:112,color:'var(--ch2)'},{name:'Q',top:194,color:'var(--ch3)'}];
+  var h=42;
+  var dBits=[1,1,0,1,0,0,1];   // D changes between clock edges
+  var dShift=P*0.35;           // where D changes inside each period
+
+  function wave(levels,changes,top){ // levels[i] holds from changes[i] to changes[i+1]
+    var hi=top, lo=top+h, d='M'+x0+' '+(levels[0]?hi:lo);
+    for(var i=1;i<changes.length;i++){
+      var y1=levels[i-1]?hi:lo, y2=levels[i]?hi:lo;
+      d+=' L'+changes[i]+' '+y1+' L'+changes[i]+' '+y2;
+    }
+    return d+' L'+xEnd+' '+(levels[levels.length-1]?hi:lo);
+  }
+  // clock: high first half of each period, rising edges at x0 + k*P
+  var cl=[],cx=[x0];
+  for(var k=0;k<n;k++){cl.push(1,0);cx.push(x0+k*P+P/2,x0+(k+1)*P);}
+  cx.pop();
+  // D
+  var dl=[0],dx=[x0];
+  for(k=0;k<n;k++){dl.push(dBits[k]);dx.push(x0+k*P+dShift);}
+  // Q: at rising edge k (k>=1) Q takes the D value present then (dBits[k-1])
+  var ql=[0],qx=[x0];
+  for(k=1;k<n;k++){ql.push(dBits[k-1]);qx.push(x0+k*P);}
+
+  var paths=[wave(cl,cx,lanes[0].top),wave(dl,dx,lanes[1].top),wave(ql,qx,lanes[2].top)];
+  lanes.forEach(function(l,i){
+    var t=el('text',{x:14,y:l.top+h/2+5,'class':'lbl',fill:l.color});t.textContent=l.name;
+    var p=el('path',{d:paths[i],'class':'t',stroke:l.color});
+    p.style.setProperty('--len',p.getTotalLength());
+  });
+})();
+</script>
+</body>
+</html>
