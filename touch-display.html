@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Touch-driven data display | Nathan Koti</title>
+<meta name="description" content="A touch-controlled data acquisition system on the MSP430, written in C and assembly by Nathan Koti.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap" id="top">
+  <header class="top">
+    <a class="mark" href="index.html">Nathan Koti</a>
+    <nav aria-label="Main">
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+  <a class="back" href="index.html#projects">Back to all projects</a>
+  <div class="d-head">
+    <p class="from">Embedded Systems Design, RIT</p>
+    <h1>Touch-driven data display</h1>
+    <p class="sum">A small data acquisition system on a TI MSP430: touch pads set it up, the ADC captures a signal, and the readings appear on an LED ring and stream to a computer.</p>
+    <ul class="meta"><li><b>When:</b> March 2026</li><li><b>Hardware:</b> MSP430G2553 LaunchPad, capacitive touch BoosterPack</li><li><b>Code:</b> C and assembly</li><li><b>My role:</b> Individual final project, with an IEEE-format report</li></ul>
+  </div>
+  <figure class="hero-fig"><a href="touch-paper.webp"><img src="touch-paper.webp" alt="Title and abstract of my IEEE-format report" width="1480" height="802"></a><figcaption>The first page of my IEEE-format report on the project.</figcaption></figure>
+  <section class="d-body">
+    <h2>What it does</h2>
+    <div class="prose">
+      <ul>
+        <li>Touch the center pad to start.</li>
+        <li>Touch up or down to sample at 100 Hz or 200 Hz.</li>
+        <li>Touch left or right to show the readings on a linear or logarithmic scale.</li>
+        <li>The board captures 20 samples, then shows each one for half a second on the ring of eight LEDs (about 10 seconds total) while sending its value over UART to a serial terminal.</li>
+        <li>Touching the center pad at any time stops the display and starts over.</li>
+      </ul>
+    </div>
+  </section>
+  <section class="d-body">
+    <h2>How I built it</h2>
+    <div class="prose">
+      <p>A short C file disables the watchdog timer, sets the clock to 1 MHz, and hands control to a state machine I wrote in assembly with six functions.</p>
+      <ul>
+        <li><b>Touch sensing:</b> each pad is run as an oscillator. A finger adds capacitance and slows it down, so I count its edges with Timer A0 over a fixed window and compare the count to a baseline minus a 20-count margin.</li>
+        <li><b>Sampling:</b> the 10-bit ADC uses its internal 1.5 V reference. Timer A1 counts to 9,999 or 4,999 on the 1 MHz clock to trigger samples at exactly 100 Hz or 200 Hz.</li>
+        <li><b>Scaling:</b> linear mode keeps the top three bits of each reading (0 to 7). Log mode finds the position of the highest 1 bit, giving 0 to 8 levels.</li>
+        <li><b>LED display:</b> the upper four LEDs share pins with the lower four using inverted logic, so only one upper LED can be on at a time. I cycle through five 50 µs frames fast enough that the eye sees a steady display.</li>
+        <li><b>UART:</b> each value is converted to an ASCII digit and sent at 9600 baud, followed by a new line.</li>
+      </ul>
+      <div class="figs">
+        <figure class="wide"><a href="touch-flowchart.webp"><img src="touch-flowchart.webp" alt="Flow chart of the program" width="310" height="970" loading="lazy"></a><figcaption>The program flow from my report: setup, three touch-input stages, then sampling, scaling, and displaying, looping back for the next run.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <section class="d-body">
+    <h2>Problems I solved</h2>
+    <div class="prose">
+      <ul>
+        <li><b>LED wiring.</b> Combining all the LED patterns into one output didn't work because of the shared, inverted pins. I gave each upper LED its own multiplexing frame.</li>
+        <li><b>Uneven brightness.</b> The lower four LEDs share one frame while the upper four get a frame each, so the lower ones looked dim. I made their frame three times longer, and forced the last LED on during its frame so it lit reliably.</li>
+        <li><b>A timer with two jobs.</b> Timer A1 handles both sampling and display timing. Leftover register settings made the first sample show with the wrong timing until I fully reset the timer between jobs.</li>
+        <li><b>No serial output.</b> I traced it to the computer's COM port buffer settings and a missing jumper on the board.</li>
+      </ul>
+    </div>
+  </section>
+  <section class="d-body">
+    <h2>Results</h2>
+    <div class="prose">
+      <p>I tested it with 10 Hz sine, square, and sawtooth waves (1 V peak to peak, 0.5 V offset) in all four rate and scale combinations, and timed each display at about 10 seconds.</p>
+      <p>I also found a limitation and what I'd change. With a 1 V input and the 1.5 V reference, the highest reading is about 682 out of 1023, so linear mode only reaches about five LEDs. Switching the ADC reference to match the selected scale would let linear mode use all eight. I'd also give each lower LED its own frame for even brightness and make the UART output more reliable.</p>
+    </div>
+  </section>
+  <nav class="next" aria-label="More projects">
+    <a href="serial-adder.html"><span>Previous project</span>Bit-serial adder/subtractor</a>
+    <a href="mic-board.html" style="text-align:right"><span>Next project</span>Microphone board PCB</a>
+  </nav>
+  <footer>Nathan Koti, <a href="mailto:nathan.koti106@gmail.com">nathan.koti106@gmail.com</a></footer>
+</div>
+</body>
+</html>

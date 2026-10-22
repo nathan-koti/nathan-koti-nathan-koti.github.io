@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microphone board PCB | Nathan Koti</title>
+<meta name="description" content="The microphone board Nathan Koti worked on for the RIT Electric Vehicle Team audio driver.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap" id="top">
+  <header class="top">
+    <a class="mark" href="index.html">Nathan Koti</a>
+    <nav aria-label="Main">
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+  <a class="back" href="index.html#projects">Back to all projects</a>
+  <div class="d-head">
+    <p class="from">RIT Electric Vehicle Team</p>
+    <h1>Microphone board PCB</h1>
+    <p class="sum">My part of a six-person team project: the board that records stereo audio for an electric vehicle audio system.</p>
+    <ul class="meta"><li><b>When:</b> October 2024 to September 2025</li><li><b>Tools:</b> Altium Designer</li><li><b>My role:</b> Microphone board, plus component research and board consolidation</li></ul>
+  </div>
+  <figure class="hero-fig"><a href="ev-mic-board-3d.webp"><img src="ev-mic-board-3d.webp" alt="3D render of the microphone board PCB" width="626" height="318"></a><figcaption>A 3D render of the microphone board in Altium. The two microphones are on the left and the bus connector is on the right.</figcaption></figure>
+  <section class="d-body">
+    <h2>The system</h2>
+    <div class="prose">
+      <p>The audio driver records and plays back sound on an electric vehicle. A main board with an STM32F446 microcontroller, an SD card, and CAN connects to separate speaker and microphone boards. The boards are daisy-chained over the Automotive Audio Bus (A2B), which carries both power and audio data on a single twisted pair of wires. Each team member owned a different board.</p>
+      <div class="figs">
+        <figure class="wide"><a href="ev-system.webp"><img src="ev-system.webp" alt="Block diagram of the audio system" width="1028" height="743" loading="lazy"></a><figcaption>System diagram: the STM32 main board, speaker board, and microphone board linked by A2B.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <section class="d-body">
+    <h2>My board</h2>
+    <div class="prose">
+      <p>The microphone board captures left and right audio and sends it back up the bus to the main board.</p>
+      <ul>
+        <li><b>Microphones:</b> two ICS-43434 MEMS microphones share the I2S clock and word-select lines. One microphone's channel pin is tied high and the other's low, so they take turns on the same data line as the right and left channels.</li>
+        <li><b>Bus interface:</b> an AD2428 A2B transceiver receives power from the bus and passes the audio to the main board.</li>
+        <li><b>Power:</b> the bus delivers about 7.5 V to the board. The A2B chip's built-in 3.3 V output powers both microphones. That output can supply only 20 mA, and the two microphones together draw about 1 mA (about 490 µA each), well within the limit.</li>
+        <li><b>Signal details:</b> 100 nF decoupling capacitors at each microphone, a 100 kΩ pull-down on the serial data line so it returns to a known state, and series termination resistors on the I2S lines.</li>
+        <li><b>End of the chain:</b> since this board is always the last node, it drops the second bus port and the circuitry for passing power on, and its sense pin is tied to ground.</li>
+        <li><b>Testing:</b> test points for 9 V, 3.3 V, and ground.</li>
+      </ul>
+      <div class="figs">
+        <figure><a href="ev-mic-schematic.webp"><img src="ev-mic-schematic.webp" alt="Altium schematic of the two microphones" width="580" height="568" loading="lazy"></a><figcaption>The microphone schematic in Altium.</figcaption></figure>
+        <figure><a href="ev-mic-power.webp"><img src="ev-mic-power.webp" alt="Power diagram of the microphone board" width="555" height="455" loading="lazy"></a><figcaption>The power budget: A2B bus power in, about 12 mA for the A2B chip, and about 490 µA for each microphone.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <section class="d-body">
+    <h2>Beyond my board</h2>
+    <div class="prose">
+      <p>I also researched electronic components rated for use in a vehicle and helped combine several circuit boards into one PCB to shrink the system's footprint.</p>
+    </div>
+  </section>
+  <nav class="next" aria-label="More projects">
+    <a href="touch-display.html"><span>Previous project</span>Touch-driven data display</a>
+    <a href="risc.html" style="text-align:right"><span>Next project</span>A RISC processor in VHDL</a>
+  </nav>
+  <footer>Nathan Koti, <a href="mailto:nathan.koti106@gmail.com">nathan.koti106@gmail.com</a></footer>
+</div>
+</body>
+</html>

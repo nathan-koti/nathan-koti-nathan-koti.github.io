@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RISC processor | Nathan Koti</title>
+<meta name="description" content="A custom RISC processor with Harvard architecture and a two-bus datapath, designed in VHDL by Nathan Koti.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap" id="top">
+  <header class="top">
+    <a class="mark" href="index.html">Nathan Koti</a>
+    <nav aria-label="Main">
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+  <a class="back" href="index.html#projects">Back to all projects</a>
+  <div class="d-head">
+    <p class="from">Digital Systems II, RIT</p>
+    <h1>A RISC processor in VHDL</h1>
+    <p class="sum">A reduced instruction set processor I designed from the datapath up, wrote in VHDL, and verified by running real programs on it.</p>
+    <ul class="meta"><li><b>When:</b> October to December 2025</li><li><b>Tools:</b> VHDL, Quartus Prime, ModelSim, FPGA board</li><li><b>My role:</b> Individual project</li></ul>
+  </div>
+  <figure class="hero-fig"><a href="risc-rtl.webp"><img src="risc-rtl.webp" alt="Quartus RTL view of the processor" width="1053" height="575"></a><figcaption>The Quartus RTL view. The control unit (left) sends load and select signals to the datapath (right). The two small blocks on the right are debugging aids I added: one turns the current instruction into readable text for the waveform viewer, and one counts machine cycles.</figcaption></figure>
+  <section class="d-body">
+    <h2>The design</h2>
+    <div class="prose">
+      <p>Each student received a different processor specification based on an assigned ID number. Mine called for:</p>
+      <table class="spec">
+        <tr><th>Memory</th><td>Harvard architecture, with separate program and data memory</td></tr>
+        <tr><th>Datapath</th><td>Two internal buses</td></tr>
+        <tr><th>ALU</th><td>Built structurally from smaller components</td></tr>
+        <tr><th>Input and output</th><td>Separately mapped, using IN and OUT instructions</td></tr>
+        <tr><th>Shift and rotate</th><td>Shift left (SHLL) and rotate right through carry (RRC)</td></tr>
+        <tr><th>Conditional jump</th><td>Taken when the selected status bit is 1</td></tr>
+        <tr><th>Control unit style</th><td>IF-ELSE statements in VHDL</td></tr>
+      </table>
+      <p>The register file holds four general registers (R0–R3), and a status register tracks carry, negative, overflow, and zero (C, N, V, Z).</p>
+    </div>
+  </section>
+  <section class="d-body">
+    <h2>How an instruction runs</h2>
+    <div class="prose">
+      <p>The control unit steps every instruction through a sequence of machine cycles and raises the right load signals at each step:</p>
+      <ul>
+        <li><b>MC0 and MC1:</b> fetch the instruction from program memory and decode it.</li>
+        <li><b>MC2:</b> load the operand register. Single-step operations like SHLL and RRC finish here and return to MC0, since the two-bus datapath can complete them in one cycle.</li>
+        <li><b>MC3:</b> do the main operation, such as an ALU add. For loads, stores, and jumps, this cycle builds the memory address by adding a base and an offset into the memory address register.</li>
+        <li><b>MC4:</b> read or write data memory, or take the jump if its condition is met.</li>
+      </ul>
+      <p>A result-select mux (D_Sel) chooses whether a register gets its new value from the ALU, data memory, or the input port.</p>
+      <div class="figs">
+        <figure><a href="risc-datapath-sketch.webp"><img src="risc-datapath-sketch.webp" alt="Hand-drawn datapath sketch" width="961" height="1400" loading="lazy"></a><figcaption>My hand-drawn datapath, worked out on paper before writing any VHDL.</figcaption></figure>
+        <figure><a href="alu-fpga.webp"><img src="alu-fpga.webp" alt="FPGA board with LEDs lit showing an ALU result" width="923" height="1231" loading="lazy"></a><figcaption>An earlier step: my ALU running on the FPGA, with the result and status bits on the LEDs.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <section class="d-body">
+    <h2>Debugging</h2>
+    <div class="prose">
+      <p>Most of the work was tracing instructions cycle by cycle in ModelSim. Two problems took the longest:</p>
+      <ul>
+        <li><b>The wrong register was being loaded.</b> My control unit didn't specify every load signal in every case, so a register could change when it shouldn't. I rewrote each case to set all load signals explicitly and added a safe default that turns every load off.</li>
+        <li><b>An instruction misbehaved in the test program.</b> Working around it with a dummy instruction threw off the program's address assignments. Tracking down and fixing the addressing took a long time, and I got it working before the deadline.</li>
+      </ul>
+    </div>
+  </section>
+  <section class="d-body">
+    <h2>Result</h2>
+    <div class="prose">
+      <p>To prove the whole processor worked, it ran a program that multiplies two 4-bit numbers entered on the switches. Multiplying 1111 by 1111 (15 × 15):</p>
+      <table class="spec">
+        <tr><th>Input read</th><td>Clock cycle 42,220</td></tr>
+        <tr><th>Multiplication finished</th><td>Clock cycle 53,578</td></tr>
+        <tr><th>Result on the LEDs</th><td>Clock cycle 62,260</td></tr>
+        <tr><th>Instructions from input to output</th><td>About 93</td></tr>
+        <tr><th>Output</th><td>0xE1, which is 225 = 15 × 15</td></tr>
+      </table>
+      <div class="figs">
+        <figure class="wide"><a href="risc-waveform.webp"><img src="risc-waveform.webp" alt="ModelSim waveform of the processor running the multiply program" width="1400" height="368" loading="lazy"></a><figcaption>The ModelSim run. Each instruction (ADD, ST, INC, IN, AND, and more) steps through its machine cycles while the register values update.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <nav class="next" aria-label="More projects">
+    <a href="mic-board.html"><span>Previous project</span>Microphone board PCB</a>
+    <a href="serial-adder.html" style="text-align:right"><span>Next project</span>Bit-serial adder/subtractor</a>
+  </nav>
+  <footer>Nathan Koti, <a href="mailto:nathan.koti106@gmail.com">nathan.koti106@gmail.com</a></footer>
+</div>
+</body>
+</html>

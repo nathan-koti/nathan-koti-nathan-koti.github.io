@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bit-serial adder/subtractor | Nathan Koti</title>
+<meta name="description" content="A 5-bit bit-serial adder/subtractor controlled by a Gray-coded finite state machine, by Nathan Koti.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap" id="top">
+  <header class="top">
+    <a class="mark" href="index.html">Nathan Koti</a>
+    <nav aria-label="Main">
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+  <a class="back" href="index.html#projects">Back to all projects</a>
+  <div class="d-head">
+    <p class="from">Digital Systems I, RIT</p>
+    <h1>Bit-serial adder/subtractor</h1>
+    <p class="sum">A 5-bit arithmetic unit that adds or subtracts one bit per clock cycle, controlled by a finite state machine I designed from a state diagram down to logic gates.</p>
+    <ul class="meta"><li><b>When:</b> April 2025</li><li><b>Tools:</b> Quartus Prime schematic design, ModelSim</li><li><b>My role:</b> Individual final project</li></ul>
+  </div>
+  <figure class="hero-fig"><a href="ds1-schematic.webp"><img src="ds1-schematic.webp" alt="Top-level schematic connecting the state machine, two shift registers, and the serial adder" width="1015" height="540"></a><figcaption>The top-level schematic: my state machine (left) controls the two 5-bit shift registers, which feed the serial adder on the right.</figcaption></figure>
+  <section class="d-body">
+    <h2>How it works</h2>
+    <div class="prose">
+      <p>Instead of adding all five bits at once, the circuit adds one pair of bits per clock cycle and keeps the carry for the next cycle. It has four parts, and everything switches on the falling clock edge, which I got by inverting the clock into each flip-flop.</p>
+      <ul>
+        <li><b>Accumulator:</b> a 5-bit shift register that holds the first number and collects the result. A 4-to-1 mux in front of each flip-flop picks between loading a value, shifting in the new sum bit, or holding.</li>
+        <li><b>Y register:</b> the same design with one addition. When subtracting, an XOR gate inverts each bit as it loads.</li>
+        <li><b>Serial adder:</b> a full adder plus a flip-flop that stores the carry. When subtracting, the carry flip-flop is preset to 1, so the inverted bits plus that 1 form the two's complement.</li>
+        <li><b>State machine:</b> decides when to load, shift, and stop.</li>
+      </ul>
+      <div class="figs">
+        <figure class="wide"><a href="ds1-accumulator.webp"><img src="ds1-accumulator.webp" alt="Schematic of the 5-bit accumulator" width="1385" height="437" loading="lazy"></a><figcaption>The accumulator: each bit has a 4-to-1 mux and a D flip-flop, with an inverted clock so it shifts on the falling edge.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <section class="d-body">
+    <h2>The state machine</h2>
+    <div class="prose">
+      <p>The controller is a Moore machine with eight states. State A waits for the start signal. State B sets subtract mode if requested. States C through G shift once each, exactly five shifts for five bits, so the state machine itself acts as the bit counter. State H raises DONE and holds the answer.</p>
+      <p>I assigned the states in Gray code, so each step changes only one state bit. That keeps the logic simpler and avoids brief glitches that a binary encoding can cause between states.</p>
+      <table class="spec">
+        <thead><tr><th>State</th><td><b>Code (y3 y2 y1)</b></td></tr></thead>
+        <tr><th>A: wait for start</th><td>000</td></tr>
+        <tr><th>B: set subtract mode</th><td>001</td></tr>
+        <tr><th>C, D, E, F, G: shift</th><td>011, 010, 110, 111, 101</td></tr>
+        <tr><th>H: done</th><td>100</td></tr>
+      </table>
+      <p>From the state table I used K-maps to simplify the next-state and output logic. The outputs came out to:</p>
+      <ul>
+        <li><span class="eq">SH = Y2 + Y3·Y1</span> (shift during states C to G)</li>
+        <li><span class="eq">DONE = Y3·<span class="ov">Y2</span>·<span class="ov">Y1</span></span> (only in state H)</li>
+        <li><span class="eq">SUB = nADD·<span class="ov">Y3</span>·<span class="ov">Y2</span>·Y1</span> (only in state B, when subtracting)</li>
+      </ul>
+      <div class="figs">
+        <figure class="wide"><a href="fsm-states.webp"><img src="fsm-states.webp" alt="State diagram of the controller" width="908" height="671" loading="lazy"></a><figcaption>The state diagram with the SH, SUB, and DONE outputs in each state.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <section class="d-body">
+    <h2>Testing</h2>
+    <div class="prose">
+      <p>I tested each part on its own before putting them together. The accumulator and Y register waveforms showed they reset to 00000, shift on each falling edge, shift in the right bit, and hold their value once DONE goes high.</p>
+      <p>The full system then ran in ModelSim against a provided reference signal. DONE matched the reference exactly, SH stayed high for exactly five clock cycles, and no glitches appeared.</p>
+      <div class="figs">
+        <figure class="wide"><a href="ds1-modelsim.webp"><img src="ds1-modelsim.webp" alt="ModelSim waveform of the full adder/subtractor" width="1330" height="549" loading="lazy"></a><figcaption>The final ModelSim run of the complete design.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <nav class="next" aria-label="More projects">
+    <a href="risc.html"><span>Previous project</span>A RISC processor in VHDL</a>
+    <a href="touch-display.html" style="text-align:right"><span>Next project</span>Touch-driven data display</a>
+  </nav>
+  <footer>Nathan Koti, <a href="mailto:nathan.koti106@gmail.com">nathan.koti106@gmail.com</a></footer>
+</div>
+</body>
+</html>

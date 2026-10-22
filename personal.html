@@ -2,55 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Personal | Nathan Koti</title>
-<meta name="description" content="Personal electronics projects by Nathan Koti.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<title>Nathan Koti</title>
+<meta http-equiv="refresh" content="0; url=index.html#projects">
 </head>
-<body class="personal">
-<div class="wrap">
-  <header class="top">
-    <a class="mark" href="index.html">Nathan Koti</a>
-    <nav aria-label="Main">
-      <a href="academic.html">Academic</a>
-      <a href="personal.html" aria-current="page">Personal</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
-  </header>
-
-  <div class="page-head">
-    <h1>Personal</h1>
-    <p>Projects I build on my own time. I only add a project here once it's finished.</p>
-  </div>
-
-  <section class="course split" id="laser-microphone">
-    <div class="course-meta">
-      <h2>Optics and analog signals</h2>
-      <span>Personal build</span>
-    </div>
-    <div>
-      <article class="feature">
-        <h3>Laser vibrometry microphone</h3>
-        <p class="when">Finished, based on a design guide by @1nska</p>
-        <p>An optical microphone that picks up sound without being near it. Sound makes a window pane vibrate by a few nanometers, and an infrared laser bounced off the glass carries those tiny vibrations back to a receiver.</p>
-        <p>The transmitter is an 808 nm laser diode driven by an LM317 set up as a current regulator, which holds the laser at a steady current of about 266 mA. The receiver starts with a BPW34 photodiode feeding one TL074 quad op-amp chip. The first stage is a transimpedance amplifier that turns the faint photocurrent into a voltage (1 V per microamp), the second doubles that signal, and the third is a two-step low-pass filter with a buffer that strips out high-frequency noise. The last stage is an LM567 tone decoder, whose output goes low when it detects the signal.</p>
-        <p>The op-amps run from a ±9 V split supply made from two 9 V batteries, and a 7805 regulator turns that into 5 V for the laser driver and the tone decoder.</p>
-        <div class="figs">
-          <figure class="wide"><a href="laser-receiver.webp"><img src="laser-receiver.webp" alt="Schematic of the four-stage laser receiver" width="1600" height="1216" loading="lazy"></a><figcaption>The receiver: photodiode into a transimpedance amplifier, a ×2 gain stage, a low-pass filter, and the LM567 tone decoder.</figcaption></figure>
-          <figure><a href="laser-driver.webp"><img src="laser-driver.webp" alt="Schematic of the LM317 laser diode driver" width="1360" height="960" loading="lazy"></a><figcaption>The laser driver: the LM317 keeps 1.25 V across a 4.7 Ω resistor, which sets the laser current to about 266 mA.</figcaption></figure>
-          <figure><a href="laser-power.webp"><img src="laser-power.webp" alt="Schematic of the split power supply and 5 V regulator" width="1600" height="1024" loading="lazy"></a><figcaption>Power: two 9 V batteries make a ±9 V supply for the op-amps, and a 7805 regulator provides 5 V.</figcaption></figure>
-        </div>
-        <ul class="tags"><li>LM317 current regulator</li><li>BPW34 photodiode</li><li>TL074 op-amps</li><li>Transimpedance amplifier</li><li>Active filters</li><li>LM567 tone decoder</li><li>Split power supply</li></ul>
-      </article>
-    </div>
-  </section>
-
-  <p class="empty">More projects are on the way and will show up here when they're done.</p>
-
-  <footer>Nathan Koti, <a href="mailto:nathan.koti106@gmail.com">nathan.koti106@gmail.com</a></footer>
-</div>
-</body>
+<body><p>This page moved to <a href="index.html#projects">nathan-koti.github.io</a>.</p></body>
 </html>
