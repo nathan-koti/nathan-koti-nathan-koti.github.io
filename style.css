@@ -139,15 +139,58 @@ footer a{color:var(--ink-soft)}
 .figs figcaption{font-size:.875rem;color:var(--ink-soft);margin-top:.5rem;line-height:1.45}
 .feature .figs{margin-top:.25rem}
 
+/* one-page layout */
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid transparent}
+[id]{scroll-margin-top:4.5rem}
+.top .mark{white-space:nowrap}
+.section-head{padding:3.5rem 0 1rem;border-top:1px solid var(--line)}
+.section-head h2{font-size:clamp(2.5rem,6vw,3.75rem);line-height:1;letter-spacing:-.035em;color:var(--c);margin-bottom:.8rem}
+.section-head p{font-size:1.1rem;color:var(--ink-soft);max-width:40rem;margin:0}
+.highlights.four{grid-template-columns:repeat(4,1fr)}
+.highlight{border-top:4px solid var(--c)}
+.highlight .tagline{display:block;font-size:.8rem;font-weight:700;color:var(--c);margin-bottom:.25rem}
+.personal .empty{padding-bottom:1rem}
+@media (max-width:1000px){.highlights.four{grid-template-columns:repeat(2,1fr)}}
+
+/* hero: RISC block diagram */
+.archfig{margin:0}
+.archfig a{display:block;border-radius:.6rem}
+.arch{width:100%;height:auto;display:block;background:var(--card);border:1px solid var(--line);border-radius:.6rem}
+.arch rect{fill:var(--paper);stroke:var(--ink);stroke-width:1.4}
+.arch .hot rect{fill:var(--card);stroke:var(--academic);stroke-width:2.2}
+.arch .frame{fill:none;stroke:var(--line);stroke-width:1.4;stroke-dasharray:5 4}
+.arch .nm{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:14px;fill:var(--ink);text-anchor:middle}
+.arch .sb{font-family:"Atkinson Hyperlegible",sans-serif;font-size:11.5px;fill:var(--ink-soft);text-anchor:middle}
+.arch .lb{font-family:"Atkinson Hyperlegible",sans-serif;font-size:11.5px;fill:var(--ink-soft)}
+.arch .w{stroke:var(--ink-soft);stroke-width:1.4}
+.arch .bus{stroke:var(--academic);stroke-width:3;stroke-linecap:round}
+.arch .dt{fill:var(--academic)}
+.arch .ahp{fill:var(--ink-soft)}
+.archfig figcaption{font-size:.875rem;color:var(--ink-soft);margin-top:.6rem}
+@media (prefers-reduced-motion:no-preference){
+  .arch .st{opacity:0;animation:archin .45s ease-out forwards;animation-delay:var(--d)}
+  @keyframes archin{to{opacity:1}}
+}
+
 @media (max-width:820px){
+  .highlights.four{grid-template-columns:1fr}
+  .top nav{gap:.75rem;font-size:.9rem}
   .figs{grid-template-columns:1fr}
   .figs img{height:240px}
   .figs figure.tall img{height:360px}
   .hero{grid-template-columns:1fr;padding:1.5rem 0 3rem}
+  .archfig{max-width:30rem}
   .split{grid-template-columns:1fr;gap:1rem}
   .folders,.highlights{grid-template-columns:1fr}
   .skills{grid-template-columns:1fr}
   .job{grid-template-columns:1fr}
   .labs li{grid-template-columns:1fr;gap:.1rem}
   .top nav{gap:.9rem;font-size:.95rem}
+}
+
+@media (max-width:440px){
+  .top{gap:.6rem}
+  .top nav{gap:.6rem;font-size:.85rem}
+  .top .mark{font-size:.95rem}
 }

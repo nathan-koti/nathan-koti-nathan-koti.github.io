@@ -11,12 +11,13 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" id="top">
   <header class="top">
-    <a class="mark" href="index.html">Nathan Koti</a>
+    <a class="mark" href="#top">Nathan Koti</a>
     <nav aria-label="Main">
-      <a href="academic.html">Academic</a>
-      <a href="personal.html">Personal</a>
+      <a href="#academic">Academic</a>
+      <a href="#personal">Personal</a>
+      <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -27,30 +28,277 @@
       <p>Electrical engineering student at the Milwaukee School of Engineering, graduating in 2029. Previously studied electrical engineering at RIT.</p>
       <p>I design digital hardware and program microcontrollers, from a custom processor written in VHDL to touch-driven systems on the MSP430.</p>
     </div>
-    <figure class="scope">
-      <svg id="scope" viewBox="0 0 480 270" role="img" aria-label="Timing diagram of a D flip-flop: a clock, a data signal, and an output that copies the data signal on each rising clock edge"></svg>
-      <figcaption>A D flip-flop: Q copies D on every rising edge of the clock.</figcaption>
+    <figure class="archfig">
+      <a href="#risc" aria-label="Jump to the RISC processor project"><svg class="arch" viewBox="0 0 480 330" role="img" aria-labelledby="arch-t"><title id="arch-t">Block diagram of my RISC processor: the program counter, program memory, and instruction register feed the control unit, which drives a two-bus datapath with registers, an ALU, a status register, a separate data memory, and input and output ports.</title><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ahp"/></marker></defs><g class="st" style="--d:0s"><rect x="16" y="14" width="66" height="50" rx="7"/><text class="nm" x="49.0" y="37.0">PC</text><text class="sb" x="49.0" y="53.0">counter</text></g><g class="st" style="--d:0.12s"><rect x="100" y="14" width="108" height="50" rx="7"/><text class="nm" x="154.0" y="37.0">Program</text><text class="sb" x="154.0" y="53.0">memory</text></g><g class="st" style="--d:0.24s"><rect x="226" y="14" width="104" height="50" rx="7"/><text class="nm" x="278.0" y="37.0">Instruction</text><text class="sb" x="278.0" y="53.0">register</text></g><g class="st hot" style="--d:0.36s"><rect x="348" y="14" width="116" height="50" rx="7"/><text class="nm" x="406.0" y="37.0">Control unit</text><text class="sb" x="406.0" y="53.0">cycles MC0–MC4</text></g><g class="st" style="--d:.2s"><line class="w" x1="82" y1="39" x2="98" y2="39" marker-end="url(#ah)"/><line class="w" x1="208" y1="39" x2="224" y2="39" marker-end="url(#ah)"/><line class="w" x1="330" y1="39" x2="346" y2="39" marker-end="url(#ah)"/></g><g class="st" style="--d:.5s"><line class="w" x1="406" y1="64" x2="406" y2="100" marker-end="url(#ah)"/><text class="lb" x="396" y="88" text-anchor="end">load and select signals</text></g><g class="st" style="--d:.6s"><rect class="frame" x="8" y="104" width="464" height="216" rx="10"/><text class="lb" x="22" y="124" text-anchor="start">Datapath with two buses</text></g><g class="st" style="--d:0.72s"><rect x="24" y="136" width="100" height="50" rx="7"/><text class="nm" x="74.0" y="159.0">Registers</text><text class="sb" x="74.0" y="175.0">R0–R3</text></g><g class="st hot" style="--d:0.8s"><rect x="140" y="136" width="100" height="50" rx="7"/><text class="nm" x="190.0" y="159.0">ALU</text><text class="sb" x="190.0" y="175.0">SHLL · RRC</text></g><g class="st" style="--d:0.88s"><rect x="256" y="136" width="92" height="50" rx="7"/><text class="nm" x="302.0" y="159.0">Status</text><text class="sb" x="302.0" y="175.0">C N V Z</text></g><g class="st" style="--d:0.96s"><rect x="364" y="136" width="92" height="50" rx="7"/><text class="nm" x="410.0" y="159.0">IN port</text><text class="sb" x="410.0" y="175.0">switches</text></g><g class="st" style="--d:.7s"><line class="bus" x1="24" y1="212" x2="456" y2="212"/><line class="bus" x1="24" y1="228" x2="456" y2="228"/></g><g class="st" style="--d:1.04s"><rect x="24" y="254" width="100" height="50" rx="7"/><text class="nm" x="74.0" y="277.0">MAR</text><text class="sb" x="74.0" y="293.0">address</text></g><g class="st" style="--d:1.12s"><rect x="140" y="254" width="116" height="50" rx="7"/><text class="nm" x="198.0" y="277.0">Data</text><text class="sb" x="198.0" y="293.0">memory</text></g><g class="st" style="--d:1.2s"><rect x="272" y="254" width="76" height="50" rx="7"/><text class="nm" x="310.0" y="277.0">D_Sel</text><text class="sb" x="310.0" y="293.0">result mux</text></g><g class="st" style="--d:1.28s"><rect x="364" y="254" width="92" height="50" rx="7"/><text class="nm" x="410.0" y="277.0">OUT port</text><text class="sb" x="410.0" y="293.0">LEDs</text></g><g class="st" style="--d:1.36s"><line class="w" x1="52" y1="186" x2="52" y2="212"/><circle class="dt" cx="52" cy="212" r="3"/><line class="w" x1="96" y1="186" x2="96" y2="228"/><circle class="dt" cx="96" cy="228" r="3"/><line class="w" x1="172" y1="186" x2="172" y2="212"/><circle class="dt" cx="172" cy="212" r="3"/><line class="w" x1="208" y1="186" x2="208" y2="228"/><circle class="dt" cx="208" cy="228" r="3"/><line class="w" x1="302" y1="186" x2="302" y2="212"/><circle class="dt" cx="302" cy="212" r="3"/><line class="w" x1="410" y1="186" x2="410" y2="212"/><circle class="dt" cx="410" cy="212" r="3"/><line class="w" x1="74" y1="254" x2="74" y2="228"/><circle class="dt" cx="74" cy="228" r="3"/><line class="w" x1="198" y1="254" x2="198" y2="228"/><circle class="dt" cx="198" cy="228" r="3"/><line class="w" x1="310" y1="254" x2="310" y2="212"/><circle class="dt" cx="310" cy="212" r="3"/><line class="w" x1="410" y1="254" x2="410" y2="228"/><circle class="dt" cx="410" cy="228" r="3"/></g></svg></a>
+      <figcaption>My RISC processor in VHDL. It uses a Harvard design, so program memory (top) is separate from data memory, and the control unit runs a two-bus datapath.</figcaption>
     </figure>
   </section>
 
-  <section class="block">
-    <div class="folders">
-      <a class="folder academic" href="academic.html">
-        <h2>Academic</h2>
-        <p>Course projects and labs from RIT, including a RISC processor in VHDL, an MSP430 data display, transistor-level circuit design, and an electric vehicle team project.</p>
-        <span class="count">Six courses and one team project</span><br>
-        <span class="go">Open the Academic folder</span>
+  <section class="block" id="highlights" aria-labelledby="hl">
+    <h2 id="hl" class="labs-title" style="margin-bottom:1rem">Start with these</h2>
+    <div class="highlights four">
+      <a class="highlight academic" href="#risc">
+        <span class="tagline">Academic</span>
+        <h3>A RISC processor in VHDL</h3>
+        <p>Designed a processor from its datapath up and ran a multiply program on it.</p>
       </a>
-      <a class="folder personal" href="personal.html">
-        <h2>Personal</h2>
-        <p>Things I build on my own time, starting with an optical microphone that turns a laser beam into sound.</p>
-        <span class="count">One finished project, more in progress</span><br>
-        <span class="go">Open the Personal folder</span>
+      <a class="highlight academic" href="#touch-display">
+        <span class="tagline">Academic</span>
+        <h3>Touch-driven data display</h3>
+        <p>An MSP430 system in C and assembly that samples, scales, displays, and streams a signal.</p>
+      </a>
+      <a class="highlight personal" href="#ev-team">
+        <span class="tagline">Personal</span>
+        <h3>EV team microphone board</h3>
+        <p>My board in a six-person team's vehicle audio system, designed in Altium.</p>
+      </a>
+      <a class="highlight personal" href="#laser-microphone">
+        <span class="tagline">Personal</span>
+        <h3>Laser vibrometry microphone</h3>
+        <p>An optical microphone that hears sound through the vibrations of a window.</p>
       </a>
     </div>
   </section>
 
-  <section class="block">
+  <div class="academic">
+  <div class="section-head" id="academic">
+    <h2>Academic</h2>
+    <p>Projects and labs from my electrical engineering coursework at RIT, newest first. Each course leads with its main project, followed by the labs that built up to it.</p>
+    <ul class="jump" aria-label="Jump to a course">
+      <li><a href="#eeee420">Embedded Systems Design</a></li>
+      <li><a href="#eeee380">Digital Electronics</a></li>
+      <li><a href="#eeee220">Digital Systems II</a></li>
+      <li><a href="#eeee281">Circuits I</a></li>
+      <li><a href="#eeee120">Digital Systems I</a></li>
+      <li><a href="#eeee346">Advanced Programming</a></li>
+    </ul>
+  </div>
+
+  <!-- EEEE-420 -->
+  <section class="course split" id="eeee420">
+    <div class="course-meta">
+      <h2>Embedded Systems Design</h2>
+      <span>EEEE-420</span>
+      <span>RIT, Spring 2026</span>
+    </div>
+    <div>
+      <article class="feature" id="touch-display">
+        <h3>Touch-driven data display</h3>
+        <p class="when">Final project, March 2026, with an IEEE-format report</p>
+        <p>Programmed an MSP430 in a mix of C and assembly to read five capacitive touch pads. The user picks a sample rate (100 or 200 Hz) and a scale (linear or base-2 logarithmic) by touching the wheel. The board then samples an analog input 20 times with its 10-bit ADC, shows each sample on a multiplexed ring of eight LEDs, and streams the values over UART at 9600 baud. All timing comes from the chip's hardware timers.</p>
+        <p>Tested with sine, square, and sawtooth inputs in all four rate and scale combinations. Along the way I fixed a wiring quirk where the upper four LEDs share pins with inverted logic, evened out LED brightness across multiplexing frames, and tracked down a timer that kept leftover settings between its two jobs.</p>
+        <div class="figs">
+          <figure class="wide tall"><a href="touch-flowchart.webp"><img src="touch-flowchart.webp" alt="Flow chart of the touch-driven display program" width="310" height="970" loading="lazy"></a><figcaption>Program flow from my IEEE report: setup, three touch-input stages, then sampling, scaling, and displaying, looping back for the next run.</figcaption></figure>
+        </div>
+        <ul class="tags"><li>MSP430</li><li>C</li><li>Assembly</li><li>Capacitive touch</li><li>ADC</li><li>Hardware timers</li><li>UART</li></ul>
+      </article>
+      <p class="labs-title">Labs</p>
+      <ul class="labs">
+        <li><span class="n">Labs 1–3</span><span>Set up the MSP430 tools, traced register values step by step while code ran, and learned the core assembly instructions and directives.</span></li>
+        <li><span class="n">Lab 4</span><span>Filled and summed arrays in memory, then wrote a multiply routine in assembly and again in C.</span></li>
+        <li><span class="n">Lab 5</span><span>Drove the booster pack's ring of eight LEDs in spinning patterns, working around the reversed wiring on half of them.</span></li>
+        <li><span class="n">Lab 6</span><span>Dimmed and brightened an LED with pulse-width modulation by switching between 80% and 20% duty cycles, in assembly and C.</span></li>
+        <li><span class="n">Lab 7</span><span>Measured each touch pad untouched and touched, then set thresholds to tell a real touch from noise.</span></li>
+        <li><span class="n">Lab 9</span><span>Read the chip's built-in temperature sensor through the ADC and got about 19.6 °C, close to the room's actual temperature.</span></li>
+        <li><span class="n">Lab 11</span><span>Combined touch input, ADC sampling, and the LED display, which grew into the final project above.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- EEEE-380 -->
+  <section class="course split" id="eeee380">
+    <div class="course-meta">
+      <h2>Digital Electronics</h2>
+      <span>EEEE-380</span>
+      <span>RIT, Spring 2026</span>
+    </div>
+    <div>
+      <p class="lede" style="margin:0 0 1.25rem">Designing logic at the transistor level: sizing transistors by hand, then checking every design in LTspice.</p>
+      <ul class="labs">
+        <li><span class="n">Lab 1</span><span>Learned LTspice by simulating an NMOS transistor and working backward from its current to find its channel length.</span></li>
+        <li><span class="n">Lab 2</span><span>Analyzed NMOS inverters with resistor and transistor loads. My hand-calculated output high of 1.15 V matched the 1.12 V simulation within 2.6%.</span></li>
+        <li><span class="n">Lab 3</span><span>Sized a CMOS inverter so its two noise margins came out equal (1.47 V and 1.46 V in simulation), measured its rise and fall times, and built a five-stage ring oscillator.</span></li>
+        <li><span class="n">Lab 4</span><span>Built CMOS logic gates, including a three-input NAND, and checked its truth table and noise margins.</span></li>
+        <li><span class="n">Lab 5</span><span>Designed a CMOS D latch to meet a timing spec and analyzed a one-shot (monostable) circuit by hand and in simulation.</span></li>
+        <li><span class="n">Lab 6</span><span>Showed how charge sharing breaks a domino logic gate: I predicted the node would drop to 1.414 V, the simulation showed 1.41 V, and adding a small keeper transistor fixed the wrong output.</span></li>
+        <li><span class="n">Lab 7</span><span>Designed a six-transistor SRAM memory cell and simulated writing and reading a stored 1 without disturbing it.</span></li>
+      </ul>
+      <div class="figs">
+        <figure><a href="inverter-vtc.webp"><img src="inverter-vtc.webp" alt="LTspice voltage transfer curve of a CMOS inverter" width="378" height="773" loading="lazy"></a><figcaption>Lab 3: my CMOS inverter's transfer curve in LTspice. The output flips at about 1.67 V, close to half of the 3.3 V supply, which is what equal noise margins look like.</figcaption></figure>
+        <figure><a href="ring-oscillator.webp"><img src="ring-oscillator.webp" alt="LTspice schematic of a five-stage ring oscillator" width="415" height="200" loading="lazy"></a><figcaption>Lab 3: five copies of that inverter connected in a loop to make a ring oscillator.</figcaption></figure>
+        <figure><a href="domino-keeper.webp"><img src="domino-keeper.webp" alt="LTspice schematic of a domino AND gate with a keeper transistor" width="1400" height="770" loading="lazy"></a><figcaption>Lab 6: the domino AND gate with the parasitic capacitors that cause charge sharing, and the keeper transistor (M7) that fixes it.</figcaption></figure>
+        <figure><a href="sram-cell.webp"><img src="sram-cell.webp" alt="LTspice schematic of a six-transistor SRAM cell" width="1119" height="1077" loading="lazy"></a><figcaption>Lab 7: the 6T SRAM cell with its precharge, read, and write circuitry.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- EEEE-220 -->
+  <section class="course split" id="eeee220">
+    <div class="course-meta">
+      <h2>Digital Systems II</h2>
+      <span>EEEE-220</span>
+      <span>RIT, Fall 2025</span>
+    </div>
+    <div>
+      <article class="feature" id="risc">
+        <h3>A RISC processor in VHDL</h3>
+        <p class="when">Course project, October to December 2025</p>
+        <p>Designed a reduced instruction set processor with Harvard architecture (separate program and data memory) and a two-bus datapath. It has a structurally built ALU, IN and OUT instructions for input and output, shift-left and rotate-through-carry instructions, and conditional jumps. I wrote the control unit and datapath in VHDL in Quartus Prime and verified them in ModelSim.</p>
+        <p>To prove the whole design worked, the processor ran a multiply program: given 15 from the switches, it worked through about 93 instructions and put 0xE1 (225) on the LEDs. Debugging meant tracing instructions cycle by cycle through waveforms and memory, including fixing a control unit bug that loaded the wrong register.</p>
+        <div class="figs">
+          <figure><a href="risc-top-level.webp"><img src="risc-top-level.webp" alt="Top-level block diagram of the RISC processor" width="1081" height="645" loading="lazy"></a><figcaption>Top level of the processor: the control unit (left) drives the datapath (right). Two extra blocks decode the current instruction and count machine cycles for debugging.</figcaption></figure>
+          <figure><a href="risc-datapath-sketch.webp"><img src="risc-datapath-sketch.webp" alt="Hand-drawn datapath sketch" width="961" height="1400" loading="lazy"></a><figcaption>My hand-drawn datapath from Lab 8, worked out on paper before writing any VHDL.</figcaption></figure>
+          <figure class="wide"><a href="risc-waveform.webp"><img src="risc-waveform.webp" alt="ModelSim waveform of the processor running a program" width="1400" height="368" loading="lazy"></a><figcaption>ModelSim run of the multiply program with the switches set to 1111. Each instruction steps through its machine cycles while the register values update.</figcaption></figure>
+        </div>
+        <ul class="tags"><li>VHDL</li><li>Quartus Prime</li><li>ModelSim</li><li>Processor design</li><li>FPGA</li></ul>
+      </article>
+      <p class="labs-title">Labs</p>
+      <ul class="labs">
+        <li><span class="n">Labs 1–2</span><span>Built a counter on the FPGA, then wrote a multiplexer and full adder three different ways in Verilog, each with my own testbench.</span></li>
+        <li><span class="n">Lab 4</span><span>Wrote multiplexers and a ripple-carry adder in both Verilog and VHDL and ran the adder on the FPGA.</span></li>
+        <li><span class="n">Labs 5–6</span><span>Built an ALU in Verilog and VHDL covering arithmetic, logic, shifts, and rotates, and tested it on the FPGA.</span></li>
+        <li><span class="n">Lab 7</span><span>Stored my name in a ROM and displayed it one ASCII character per clock cycle.</span></li>
+        <li><span class="n">Labs 8–10</span><span>Designed the processor's datapath, control unit, and instruction cycles, which became the RISC processor above.</span></li>
+      </ul>
+      <div class="figs">
+        <figure><a href="alu-fpga.webp"><img src="alu-fpga.webp" alt="FPGA board with LEDs lit showing an ALU result" width="923" height="1231" loading="lazy"></a><figcaption>Labs 5–6: my ALU running on the FPGA board, with the result and status bits shown on the LEDs.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- EEEE-281 -->
+  <section class="course split" id="eeee281">
+    <div class="course-meta">
+      <h2>Circuits I</h2>
+      <span>EEEE-281</span>
+      <span>RIT, Fall 2025</span>
+    </div>
+    <div>
+      <p class="lede" style="margin:0 0 1.25rem">Every lab compared three answers: a hand calculation, an LTspice simulation, and a real circuit on a breadboard.</p>
+      <ul class="labs">
+        <li><span class="n">Lab 1</span><span>Designed a voltage divider to produce 3.3 V from 5 V, then chose a load resistor that kept the loaded output where it needed to be.</span></li>
+        <li><span class="n">Lab 2</span><span>Used nodal analysis on a transistor circuit. The base voltage came out to −1.811 V by hand, −1.838 V in simulation, and −1.853 V on the bench.</span></li>
+        <li><span class="n">Lab 3</span><span>Measured how a circuit's output drops under load. The hardware slope (−51.4 Ω) landed close to the simulation's (−49.6 Ω).</span></li>
+        <li><span class="n">Lab 4</span><span>Built inverting and non-inverting op-amp amplifiers, picking feedback resistors to hit target gains.</span></li>
+      </ul>
+      <div class="figs">
+        <figure><a href="bjt-breadboard.webp"><img src="bjt-breadboard.webp" alt="Transistor circuit on a breadboard with measurement probes" width="1049" height="1400" loading="lazy"></a><figcaption>Lab 2: the transistor circuit on the breadboard, ready for voltage measurements.</figcaption></figure>
+        <figure><a href="thevenin-plot.webp"><img src="thevenin-plot.webp" alt="Graph of output voltage versus load current with a best-fit line" width="1400" height="910" loading="lazy"></a><figcaption>Lab 3: output voltage falling as load current rises, with the line of best fit used to find the internal resistance.</figcaption></figure>
+        <figure><a href="opamp-breadboard.webp"><img src="opamp-breadboard.webp" alt="Op-amp amplifier built on a breadboard" width="917" height="1217" loading="lazy"></a><figcaption>Lab 4: the op-amp amplifier on the breadboard.</figcaption></figure>
+        <figure><a href="opamp-scope.webp"><img src="opamp-scope.webp" alt="Oscilloscope screen showing op-amp input and output sine waves" width="435" height="337" loading="lazy"></a><figcaption>Lab 4: the amplifier's input and output sine waves on the oscilloscope.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- EEEE-120 -->
+  <section class="course split" id="eeee120">
+    <div class="course-meta">
+      <h2>Digital Systems I</h2>
+      <span>EEEE-120</span>
+      <span>RIT, Spring 2025</span>
+    </div>
+    <div>
+      <article class="feature" id="serial-adder">
+        <h3>Bit-serial adder/subtractor</h3>
+        <p class="when">Final project, April 2025</p>
+        <p>Designed a 5-bit adder/subtractor that works one bit at a time. Two shift registers feed a serial adder, an accumulator collects the result, and a single finite state machine controls loading, adding or subtracting, shifting, and signaling when it's done. Built in Quartus Prime and verified with gate-level simulation in ModelSim.</p>
+        <div class="figs">
+          <figure class="wide"><a href="fsm-states.webp"><img src="fsm-states.webp" alt="State diagram of the serial adder controller" width="908" height="671" loading="lazy"></a><figcaption>The controller's state diagram: it loads the inputs, sets subtract mode when needed, steps through one shift per bit, and raises DONE at the end.</figcaption></figure>
+        </div>
+        <ul class="tags"><li>Quartus Prime</li><li>ModelSim</li><li>FSM design</li><li>Shift registers</li></ul>
+      </article>
+      <p class="labs-title">Labs</p>
+      <ul class="labs">
+        <li><span class="n">Lab 3</span><span>Compared two logic circuits on the FPGA and oscilloscope, showing an OR gate with inverted inputs behaves like a NAND.</span></li>
+        <li><span class="n">Lab 4</span><span>Rebuilt a gate-level circuit with multiplexers and confirmed both versions gave the same output.</span></li>
+        <li><span class="n">Lab 5</span><span>Simplified a full adder with Karnaugh maps, combined two into a 2-bit adder, and tested it on the FPGA.</span></li>
+        <li><span class="n">Lab 6</span><span>Built a subtractor with extra outputs that flag zero and negative results.</span></li>
+        <li><span class="n">Lab 7</span><span>Solved one problem four ways (sum of products, product of sums, multiplexers, and a decoder) to compare cost and delay.</span></li>
+        <li><span class="n">Lab 8</span><span>Wired D latches and D flip-flops into shift registers to see how each responds to the clock.</span></li>
+        <li><span class="n">Lab 9</span><span>Built a counter with a synchronous clear and showed why an asynchronous clear briefly flashes the wrong value.</span></li>
+        <li><span class="n">Lab 10</span><span>Designed a state machine that detects bit patterns, once in Gray code and once in binary, and confirmed both gave the same output.</span></li>
+      </ul>
+      <div class="figs">
+        <figure><a href="counter-scope.webp"><img src="counter-scope.webp" alt="Tektronix oscilloscope showing a square wave" width="1050" height="1400" loading="lazy"></a><figcaption>Lab 9: testing the counter circuit on the oscilloscope.</figcaption></figure>
+        <figure><a href="sequence-fsm-sketch.webp"><img src="sequence-fsm-sketch.webp" alt="Hand-drawn state diagram and state assignment table" width="466" height="441" loading="lazy"></a><figcaption>Lab 10: my hand-drawn state diagram and state assignment for the sequence detector.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- EEEE-346 -->
+  <section class="course split" id="eeee346">
+    <div class="course-meta">
+      <h2>Advanced Programming</h2>
+      <span>EEEE-346</span>
+      <span>RIT, Spring 2025</span>
+    </div>
+    <div>
+      <p class="lede" style="margin:0 0 1.25rem">Three C and C++ projects, each building on more of the language.</p>
+      <ul class="labs">
+        <li><span class="n">Project 1</span><span><b>Image processing.</b> Wrote negation, thresholding, histogram stretching, median filtering, and edge detection for grayscale images.</span></li>
+        <li><span class="n">Project 2</span><span><b>Text-based game.</b> Built a battle-and-collect game from four C++ classes using strings and vectors.</span></li>
+        <li><span class="n">Project 3</span><span><b>Classical ciphers.</b> Built the Affine, Vigenère, and Rail Fence ciphers as classes inheriting from one abstract base class, so a single pointer can run any of them.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="personal">
+  <div class="section-head" id="personal">
+    <h2>Personal</h2>
+    <p>Work outside of class: student team projects and things I build on my own time. I only add a project here once it's finished.</p>
+  </div>
+
+  <!-- EV team (outside of class) -->
+  <section class="course split" id="ev-team">
+    <div class="course-meta">
+      <h2>Electric Vehicle Team</h2>
+      <span>Student team, RIT</span>
+      <span>October 2024 to September 2025</span>
+    </div>
+    <div>
+      <article class="feature">
+        <h3>Audio driver</h3>
+        <p class="when">Team of six, my part: the microphone board</p>
+        <p>An audio system for an electric vehicle that can record and play back sound. A main board with an STM32 microcontroller and SD card connects to separate speaker and microphone boards over the Automotive Audio Bus, which carries both power and data on a single twisted pair.</p>
+        <p>Each team member owned a different part of the system, and mine was the microphone board, the part that records audio. I worked on its circuit in Altium Designer: two MEMS microphones capture left and right channels and send the audio over I2S to the board's bus chip, which passes it back to the STM32. I also researched vehicle-compatible components and helped combine several boards into a single PCB to save space.</p>
+        <div class="figs">
+          <figure><a href="ev-system.webp"><img src="ev-system.webp" alt="Block diagram of the audio system boards" width="1028" height="743" loading="lazy"></a><figcaption>System diagram: the STM32 main board connects to the speaker and microphone boards over the Automotive Audio Bus.</figcaption></figure>
+          <figure><a href="ev-mic-schematic.webp"><img src="ev-mic-schematic.webp" alt="Altium schematic of the microphone board" width="580" height="568" loading="lazy"></a><figcaption>My microphone board schematic: two ICS-43434 MEMS microphones (left and right channels) sharing the clock, data, and word-select lines, powered from 3.3 V.</figcaption></figure>
+          <figure class="wide"><a href="ev-mic-board-3d.webp"><img src="ev-mic-board-3d.webp" alt="3D render of the Audio Driver microphone board PCB" width="626" height="318" loading="lazy"></a><figcaption>3D render of the microphone board layout in Altium, with the two microphones on the left and the bus connector on the right.</figcaption></figure>
+        </div>
+        <ul class="tags"><li>Altium Designer</li><li>STM32</li><li>PCB design</li><li>I2S</li><li>Automotive Audio Bus</li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="course split" id="laser-microphone">
+    <div class="course-meta">
+      <h2>Optics and analog signals</h2>
+      <span>Personal build</span>
+    </div>
+    <div>
+      <article class="feature">
+        <h3>Laser vibrometry microphone</h3>
+        <p class="when">Finished, based on a design guide by @1nska</p>
+        <p>An optical microphone that picks up sound without being near it. Sound makes a window pane vibrate by a few nanometers, and an infrared laser bounced off the glass carries those tiny vibrations back to a receiver.</p>
+        <p>The transmitter is an 808 nm laser diode driven by an LM317 set up as a current regulator, which holds the laser at a steady current of about 266 mA. The receiver starts with a BPW34 photodiode feeding one TL074 quad op-amp chip. The first stage is a transimpedance amplifier that turns the faint photocurrent into a voltage (1 V per microamp), the second doubles that signal, and the third is a two-step low-pass filter with a buffer that strips out high-frequency noise. The last stage is an LM567 tone decoder, whose output goes low when it detects the signal.</p>
+        <p>The op-amps run from a ±9 V split supply made from two 9 V batteries, and a 7805 regulator turns that into 5 V for the laser driver and the tone decoder.</p>
+        <div class="figs">
+          <figure class="wide"><a href="laser-receiver.webp"><img src="laser-receiver.webp" alt="Schematic of the four-stage laser receiver" width="1600" height="1216" loading="lazy"></a><figcaption>The receiver: photodiode into a transimpedance amplifier, a ×2 gain stage, a low-pass filter, and the LM567 tone decoder.</figcaption></figure>
+          <figure><a href="laser-driver.webp"><img src="laser-driver.webp" alt="Schematic of the LM317 laser diode driver" width="1360" height="960" loading="lazy"></a><figcaption>The laser driver: the LM317 keeps 1.25 V across a 4.7 Ω resistor, which sets the laser current to about 266 mA.</figcaption></figure>
+          <figure><a href="laser-power.webp"><img src="laser-power.webp" alt="Schematic of the split power supply and 5 V regulator" width="1600" height="1024" loading="lazy"></a><figcaption>Power: two 9 V batteries make a ±9 V supply for the op-amps, and a 7805 regulator provides 5 V.</figcaption></figure>
+        </div>
+        <ul class="tags"><li>LM317 current regulator</li><li>BPW34 photodiode</li><li>TL074 op-amps</li><li>Transimpedance amplifier</li><li>Active filters</li><li>LM567 tone decoder</li><li>Split power supply</li></ul>
+      </article>
+    </div>
+  </section>
+
+  <p class="empty">More projects are on the way and will show up here when they're done.</p>
+  </div>
+
+  <section class="block" id="skills">
     <div class="split">
       <h2>Skills</h2>
       <div class="skills">
@@ -96,51 +344,8 @@
     </div>
   </section>
 
-  <footer>Nathan Koti</footer>
+  <footer>Nathan Koti, <a href="mailto:nathan.koti106@gmail.com">nathan.koti106@gmail.com</a></footer>
 </div>
 
-<script>
-// Draws a D flip-flop timing diagram: CLK, D, and Q (Q takes D on each rising edge).
-(function(){
-  var svg=document.getElementById('scope');
-  var NS='http://www.w3.org/2000/svg';
-  function el(tag,attrs){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);svg.appendChild(e);return e;}
-  // screen grid
-  for(var x=0;x<=480;x+=40)el('line',{x1:x,y1:0,x2:x,y2:270,'class':'g'});
-  for(var y=0;y<=270;y+=33.75)el('line',{x1:0,y1:y,x2:480,y2:y,'class':'g'});
-
-  var x0=60, P=60, n=7, xEnd=x0+P*n;
-  var lanes=[{name:'CLK',top:30,color:'var(--ch1)'},{name:'D',top:112,color:'var(--ch2)'},{name:'Q',top:194,color:'var(--ch3)'}];
-  var h=42;
-  var dBits=[1,1,0,1,0,0,1];   // D changes between clock edges
-  var dShift=P*0.35;           // where D changes inside each period
-
-  function wave(levels,changes,top){ // levels[i] holds from changes[i] to changes[i+1]
-    var hi=top, lo=top+h, d='M'+x0+' '+(levels[0]?hi:lo);
-    for(var i=1;i<changes.length;i++){
-      var y1=levels[i-1]?hi:lo, y2=levels[i]?hi:lo;
-      d+=' L'+changes[i]+' '+y1+' L'+changes[i]+' '+y2;
-    }
-    return d+' L'+xEnd+' '+(levels[levels.length-1]?hi:lo);
-  }
-  // clock: high first half of each period, rising edges at x0 + k*P
-  var cl=[],cx=[x0];
-  for(var k=0;k<n;k++){cl.push(1,0);cx.push(x0+k*P+P/2,x0+(k+1)*P);}
-  cx.pop();
-  // D
-  var dl=[0],dx=[x0];
-  for(k=0;k<n;k++){dl.push(dBits[k]);dx.push(x0+k*P+dShift);}
-  // Q: at rising edge k (k>=1) Q takes the D value present then (dBits[k-1])
-  var ql=[0],qx=[x0];
-  for(k=1;k<n;k++){ql.push(dBits[k-1]);qx.push(x0+k*P);}
-
-  var paths=[wave(cl,cx,lanes[0].top),wave(dl,dx,lanes[1].top),wave(ql,qx,lanes[2].top)];
-  lanes.forEach(function(l,i){
-    var t=el('text',{x:14,y:l.top+h/2+5,'class':'lbl',fill:l.color});t.textContent=l.name;
-    var p=el('path',{d:paths[i],'class':'t',stroke:l.color});
-    p.style.setProperty('--len',p.getTotalLength());
-  });
-})();
-</script>
 </body>
 </html>
